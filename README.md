@@ -1,0 +1,3 @@
+# diploma_toir
+
+INIT
