@@ -1,0 +1,41 @@
+{
+    "app": {
+        "name": "execution_service",
+        "version": "1.0.0",
+        "environment": "development",
+        "port": 8083
+    },
+    "logger": {
+        "level": "debug",
+        "file": "logs/execution_service.log"
+    },
+    "database": {
+        "host": "postgres",
+        "port": 5432,
+        "username": "postgres",
+        "password": "postgres",
+        "dbname": "aircraft_maintenance",
+        "schema": "execution"
+    },
+    "redis": {
+        "host": "redis",
+        "port": 6379,
+        "password": "",
+        "db": 0
+    },
+    "services": {
+        "references": {
+            "url": "http://service-p1:8081"
+        },
+        "planning": {
+            "url": "http://service-p2:8082"
+        },
+        "inventory": {
+            "url": "http://service-p4:8084"
+        }
+    },
+    "auth": {
+        "jwt_public_key_path": "config/jwt_public.pem",
+        "token_ttl_seconds": 3600
+    }
+} 

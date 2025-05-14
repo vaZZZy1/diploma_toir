@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AircraftList>
+  <Aircraft>
+    <RegistrationNumber>RA-12345</RegistrationNumber>
+    <Type>B737-800</Type>
+    <SerialNumber>12345</SerialNumber>
+    <Operator>Aeroflot</Operator>
+    <Status>Active</Status>
+    <ManufactureDate>2015-05-12</ManufactureDate>
+    <NextCheckDate>2023-06-15</NextCheckDate>
+  </Aircraft>
+  <Aircraft>
+    <RegistrationNumber>RA-23456</RegistrationNumber>
+    <Type>A320-214</Type>
+    <SerialNumber>23456</SerialNumber>
+    <Operator>S7 Airlines</Operator>
+    <Status>Active</Status>
+    <ManufactureDate>2017-09-23</ManufactureDate>
+    <NextCheckDate>2023-07-22</NextCheckDate>
+  </Aircraft>
+  <Aircraft>
+    <RegistrationNumber>RA-34567</RegistrationNumber>
+    <Type>SSJ-100</Type>
+    <SerialNumber>34567</SerialNumber>
+    <Operator>Rossiya</Operator>
+    <Status>Maintenance</Status>
+    <ManufactureDate>2016-03-15</ManufactureDate>
+    <NextCheckDate>2023-08-05</NextCheckDate>
+  </Aircraft>
+  <Aircraft>
+    <RegistrationNumber>RA-45678</RegistrationNumber>
+    <Type>B777-300ER</Type>
+    <SerialNumber>45678</SerialNumber>
+    <Operator>Aeroflot</Operator>
+    <Status>Active</Status>
+    <ManufactureDate>2018-11-30</ManufactureDate>
+    <NextCheckDate>2023-09-18</NextCheckDate>
+  </Aircraft>
+  <Aircraft>
+    <RegistrationNumber>RA-56789</RegistrationNumber>
+    <Type>A321-211</Type>
+    <SerialNumber>56789</SerialNumber>
+    <Operator>Ural Airlines</Operator>
+    <Status>Inactive</Status>
+    <ManufactureDate>2014-07-14</ManufactureDate>
+    <NextCheckDate>2023-10-07</NextCheckDate>
+  </Aircraft>
+</AircraftList> 

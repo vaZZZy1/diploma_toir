@@ -1,0 +1,43 @@
+app:
+  name: reference-service
+  version: 1.0.0
+  env: development
+  port: 8081
+
+logger:
+  level: debug
+
+postgres:
+  host: postgres
+  port: 5432
+  username: postgres
+  password: postgres
+  dbname: aircraft_maintenance
+  sslmode: disable
+  
+redis:
+  host: redis
+  port: 6379
+  password: ""
+  db: 0
+
+auth:
+  jwt_signing_key: "your-secret-key"
+  access_token_ttl: 15m
+  refresh_token_ttl: 24h
+  
+data_sources:
+  - name: "Реестр воздушных судов РФ"
+    type: "website"
+    url: "https://example.com/aircraft-registry"
+    active: true
+  
+  - name: "Производители воздушных судов"
+    type: "csv"
+    url: "data/manufacturers.csv"
+    active: true
+
+  - name: "История эксплуатации"
+    type: "xml"
+    url: "data/aircraft_history.xml"
+    active: true 

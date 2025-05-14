@@ -1,0 +1,46 @@
+{
+    "app": {
+        "name": "inventory_service",
+        "version": "1.0.0",
+        "environment": "development",
+        "port": 8084
+    },
+    "logger": {
+        "level": "debug",
+        "file": "logs/inventory_service.log"
+    },
+    "database": {
+        "host": "postgres",
+        "port": 5432,
+        "username": "postgres",
+        "password": "postgres",
+        "dbname": "aircraft_maintenance",
+        "schema": "inventory"
+    },
+    "redis": {
+        "host": "redis",
+        "port": 6379,
+        "password": "",
+        "db": 0
+    },
+    "services": {
+        "references": {
+            "url": "http://service-p1:8081"
+        },
+        "planning": {
+            "url": "http://service-p2:8082"
+        },
+        "execution": {
+            "url": "http://service-p3:8083"
+        }
+    },
+    "auth": {
+        "jwt_public_key_path": "config/jwt_public.pem",
+        "token_ttl_seconds": 3600
+    },
+    "inventory": {
+        "low_stock_threshold_percent": 20,
+        "order_lead_time_days": 14,
+        "auto_reorder_enabled": true
+    }
+} 

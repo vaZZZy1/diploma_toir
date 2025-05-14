@@ -1,0 +1,46 @@
+app:
+  name: analytics-service
+  version: 1.0.0
+  env: development
+  port: 8085
+
+logger:
+  level: debug
+
+postgres:
+  host: postgres
+  port: 5432
+  username: postgres
+  password: postgres
+  dbname: aircraft_maintenance
+  sslmode: disable
+  
+redis:
+  host: redis
+  port: 6379
+  password: ""
+  db: 0
+
+prometheus:
+  enabled: true
+  port: 9095
+
+auth:
+  jwt_signing_key: "your-secret-key"
+  access_token_ttl: 15m
+  refresh_token_ttl: 24h
+  
+services:
+  references:
+    url: http://service-p1:8081
+  planning:
+    url: http://service-p2:8082
+  execution:
+    url: http://service-p3:8083
+  inventory:
+    url: http://service-p4:8084
+    
+analytics:
+  report_cache_ttl: 600s
+  default_aggregation_period: 30d
+  max_data_points: 1000 
