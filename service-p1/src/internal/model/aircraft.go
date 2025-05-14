@@ -6,7 +6,7 @@ import (
 	"github.com/google/uuid"
 )
 
-// Aircraft представляет информацию о воздушном судне
+
 type Aircraft struct {
 	ID                 uuid.UUID  `json:"id" pg:"id,pk,type:uuid"`
 	RegistrationNumber string     `json:"registration_number" pg:"registration_number"`
@@ -22,7 +22,7 @@ type Aircraft struct {
 	UpdatedAt          time.Time  `json:"updated_at" pg:"updated_at"`
 }
 
-// AircraftType представляет тип воздушного судна
+
 type AircraftType struct {
 	ID               uuid.UUID `json:"id" pg:"id,pk,type:uuid"`
 	Code             string    `json:"code" pg:"code"`
@@ -35,7 +35,7 @@ type AircraftType struct {
 	UpdatedAt        time.Time `json:"updated_at" pg:"updated_at"`
 }
 
-// Manufacturer представляет производителя воздушных судов
+
 type Manufacturer struct {
 	ID        uuid.UUID `json:"id" pg:"id,pk,type:uuid"`
 	Name      string    `json:"name" pg:"name"`
@@ -45,7 +45,7 @@ type Manufacturer struct {
 	UpdatedAt time.Time `json:"updated_at" pg:"updated_at"`
 }
 
-// AircraftDataSource представляет источник данных о воздушных судах
+
 type AircraftDataSource struct {
 	ID          uuid.UUID `json:"id" pg:"id,pk,type:uuid"`
 	Name        string    `json:"name" pg:"name"`

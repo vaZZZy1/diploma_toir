@@ -15,12 +15,12 @@ import (
 	"github.com/vazy1/reference-service/internal/model"
 )
 
-// AircraftDataParser представляет парсер данных о воздушных судах
+
 type AircraftDataParser struct {
 	httpClient *http.Client
 }
 
-// NewAircraftDataParser создает новый экземпляр парсера данных о воздушных судах
+
 func NewAircraftDataParser() *AircraftDataParser {
 	return &AircraftDataParser{
 		httpClient: &http.Client{
@@ -29,7 +29,7 @@ func NewAircraftDataParser() *AircraftDataParser {
 	}
 }
 
-// ParseCSVFile парсит CSV файл с данными воздушных судов
+
 func (p *AircraftDataParser) ParseCSVFile(filePath string) ([]model.Aircraft, error) {
 	file, err := os.Open(filePath)
 	if err != nil {
@@ -40,13 +40,13 @@ func (p *AircraftDataParser) ParseCSVFile(filePath string) ([]model.Aircraft, er
 	return p.parseCSV(file)
 }
 
-// ParseCSVData парсит данные из CSV строки
+
 func (p *AircraftDataParser) ParseCSVData(data string) ([]model.Aircraft, error) {
 	reader := strings.NewReader(data)
 	return p.parseCSV(reader)
 }
 
-// ParseXMLFile парсит XML файл с данными воздушных судов
+
 func (p *AircraftDataParser) ParseXMLFile(filePath string) ([]model.Aircraft, error) {
 	file, err := os.Open(filePath)
 	if err != nil {
@@ -57,7 +57,7 @@ func (p *AircraftDataParser) ParseXMLFile(filePath string) ([]model.Aircraft, er
 	return p.parseXML(file)
 }
 
-// ParseWebsiteData парсит данные с веб-сайта
+
 func (p *AircraftDataParser) ParseWebsiteData(url string) ([]model.Aircraft, error) {
 	resp, err := p.httpClient.Get(url)
 	if err != nil {
@@ -93,7 +93,7 @@ func (p *AircraftDataParser) ParseWebsiteData(url string) ([]model.Aircraft, err
 	return aircrafts, nil
 }
 
-// Вспомогательная функция для парсинга CSV данных
+
 func (p *AircraftDataParser) parseCSV(r io.Reader) ([]model.Aircraft, error) {
 	reader := csv.NewReader(r)
 	
@@ -162,7 +162,7 @@ func (p *AircraftDataParser) parseCSV(r io.Reader) ([]model.Aircraft, error) {
 	return aircrafts, nil
 }
 
-// XML структуры для парсинга
+
 type xmlAircraftList struct {
 	XMLName   xml.Name      `xml:"AircraftList"`
 	Aircrafts []xmlAircraft `xml:"Aircraft"`
@@ -175,7 +175,7 @@ type xmlAircraft struct {
 	Status             string `xml:"Status"`
 }
 
-// Парсинг XML данных
+
 func (p *AircraftDataParser) parseXML(r io.Reader) ([]model.Aircraft, error) {
 	var xmlData xmlAircraftList
 	decoder := xml.NewDecoder(r)

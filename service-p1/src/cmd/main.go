@@ -11,19 +11,16 @@ import (
 )
 
 func main() {
-	// Определение параметров командной строки
 	csvFlag := flag.String("csv", "", "Путь к CSV файлу с данными воздушных судов")
 	xmlFlag := flag.String("xml", "", "Путь к XML файлу с данными воздушных судов")
 	urlFlag := flag.String("url", "", "URL веб-страницы с данными воздушных судов")
 	outputFlag := flag.String("output", "", "Путь для сохранения результатов в JSON формате")
 	flag.Parse()
 
-	// Создаем парсер
 	aircraftParser := parser.NewAircraftDataParser()
 	var results []interface{}
 	var err error
 
-	// Выбираем источник данных на основе флагов
 	if *csvFlag != "" {
 		log.Printf("Парсинг CSV файла: %s", *csvFlag)
 		results, err = aircraftParser.ParseCSVFile(*csvFlag)
@@ -47,10 +44,8 @@ func main() {
 		os.Exit(1)
 	}
 
-	// Вывод результатов
 	log.Printf("Найдено записей: %d", len(results))
 
-	// Сохранение результатов в файл JSON при необходимости
 	if *outputFlag != "" {
 		jsonData, err := json.MarshalIndent(results, "", "  ")
 		if err != nil {
@@ -63,7 +58,6 @@ func main() {
 
 		log.Printf("Результаты сохранены в файл: %s", *outputFlag)
 	} else {
-		// Вывод первых 5 результатов
 		count := 5
 		if len(results) < count {
 			count = len(results)

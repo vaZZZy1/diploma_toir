@@ -7,9 +7,9 @@ import (
 	"strings"
 
 	"github.com/spf13/viper"
+	"gopkg.in/yaml.v3"
 )
 
-// Config представляет конфигурацию приложения
 type Config struct {
 	App        AppConfig        `mapstructure:"app"`
 	Logger     LoggerConfig     `mapstructure:"logger"`
@@ -19,7 +19,6 @@ type Config struct {
 	DataSources []DataSourceConfig `mapstructure:"data_sources"`
 }
 
-// AppConfig представляет конфигурацию приложения
 type AppConfig struct {
 	Name    string `mapstructure:"name"`
 	Version string `mapstructure:"version"`
@@ -27,12 +26,10 @@ type AppConfig struct {
 	Port    int    `mapstructure:"port"`
 }
 
-// LoggerConfig представляет конфигурацию логгера
 type LoggerConfig struct {
 	Level string `mapstructure:"level"`
 }
 
-// PostgresConfig представляет конфигурацию PostgreSQL
 type PostgresConfig struct {
 	Host     string `mapstructure:"host"`
 	Port     string `mapstructure:"port"`
@@ -42,7 +39,6 @@ type PostgresConfig struct {
 	SSLMode  string `mapstructure:"sslmode"`
 }
 
-// RedisConfig представляет конфигурацию Redis
 type RedisConfig struct {
 	Host     string `mapstructure:"host"`
 	Port     string `mapstructure:"port"`
@@ -50,14 +46,12 @@ type RedisConfig struct {
 	DB       int    `mapstructure:"db"`
 }
 
-// AuthConfig представляет конфигурацию аутентификации
 type AuthConfig struct {
 	JWTSigningKey    string `mapstructure:"jwt_signing_key"`
 	AccessTokenTTL   string `mapstructure:"access_token_ttl"`
 	RefreshTokenTTL  string `mapstructure:"refresh_token_ttl"`
 }
 
-// DataSourceConfig представляет конфигурацию источника данных
 type DataSourceConfig struct {
 	Name   string `mapstructure:"name"`
 	Type   string `mapstructure:"type"`
@@ -65,7 +59,6 @@ type DataSourceConfig struct {
 	Active bool   `mapstructure:"active"`
 }
 
-// LoadConfig загружает конфигурацию из файла
 func LoadConfig(configDir string) (*Config, error) {
 	v := viper.New()
 	v.SetConfigName("config")
@@ -76,7 +69,6 @@ func LoadConfig(configDir string) (*Config, error) {
 
 	if err := v.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
-			// Если файл не найден, создаем его с дефолтными настройками
 			defaultConfig := DefaultConfig()
 			configBytes, _ := yaml.Marshal(defaultConfig)
 			configPath := filepath.Join(configDir, "config.yaml")
@@ -93,7 +85,6 @@ func LoadConfig(configDir string) (*Config, error) {
 		return nil, fmt.Errorf("не удалось десериализовать конфигурацию: %w", err)
 	}
 
-	// Проверяем переменные среды
 	if envHost := os.Getenv("POSTGRES_HOST"); envHost != "" {
 		config.Postgres.Host = envHost
 	}
@@ -119,7 +110,6 @@ func LoadConfig(configDir string) (*Config, error) {
 	return &config, nil
 }
 
-// DefaultConfig возвращает конфигурацию по умолчанию
 func DefaultConfig() *Config {
 	return &Config{
 		App: AppConfig{
@@ -159,4 +149,4 @@ func DefaultConfig() *Config {
 			},
 		},
 	}
-} 
+}
