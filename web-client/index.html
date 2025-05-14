@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Система технического обслуживания воздушных судов</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Система ТО ВС</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#" data-section="aircraft">Воздушные суда</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-section="maintenance">Планирование ТО</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-section="tasks">Задачи и работы</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-section="inventory">Склад и запчасти</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-section="reports">Отчеты и аналитика</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div id="main-content">
+            <div id="welcome-section" class="text-center">
+                <h1>Система технического обслуживания воздушных судов</h1>
+                <p class="lead">Выберите нужный раздел в меню выше</p>
+            </div>
+            
+            <div id="aircraft-section" class="content-section d-none">
+                <h2>Управление парком воздушных судов</h2>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <input type="text" id="aircraft-search" class="form-control" placeholder="Поиск ВС...">
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <button class="btn btn-primary" id="add-aircraft-btn">Добавить ВС</button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Рег. номер</th>
+                                <th>Тип ВС</th>
+                                <th>Серийный номер</th>
+                                <th>Год выпуска</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody id="aircraft-table-body">
+                            <!-- Данные будут загружены JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="maintenance-section" class="content-section d-none">
+                <h2>Планирование технического обслуживания</h2>
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <select class="form-select" id="maintenance-filter">
+                            <option value="all">Все ВС</option>
+                            <option value="scheduled">Запланированные ТО</option>
+                            <option value="pending">Ожидающие ТО</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="date" class="form-control" id="maintenance-date">
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <button class="btn btn-primary" id="add-maintenance-btn">Создать план ТО</button>
+                    </div>
+                </div>
+                <div id="maintenance-calendar">
+                    <!-- Календарь ТО будет загружен JS -->
+                </div>
+            </div>
+            
+            <div id="tasks-section" class="content-section d-none">
+                <h2>Задачи и работы</h2>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <select class="form-select" id="tasks-filter">
+                            <option value="all">Все задачи</option>
+                            <option value="pending">Ожидающие выполнения</option>
+                            <option value="in-progress">В процессе</option>
+                            <option value="completed">Завершенные</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <button class="btn btn-primary" id="add-task-btn">Добавить задачу</button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Описание</th>
+                                <th>ВС</th>
+                                <th>Статус</th>
+                                <th>Исполнитель</th>
+                                <th>Срок</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tasks-table-body">
+                            <!-- Данные будут загружены JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="inventory-section" class="content-section d-none">
+                <h2>Склад и запчасти</h2>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <input type="text" id="inventory-search" class="form-control" placeholder="Поиск запчастей...">
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <button class="btn btn-primary" id="add-part-btn">Добавить запчасть</button>
+                        <button class="btn btn-outline-primary" id="order-part-btn">Заказать запчасти</button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Наименование</th>
+                                <th>Артикул</th>
+                                <th>Количество</th>
+                                <th>Местоположение</th>
+                                <th>Статус</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventory-table-body">
+                            <!-- Данные будут загружены JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="reports-section" class="content-section d-none">
+                <h2>Отчеты и аналитика</h2>
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Состояние парка ВС</h5>
+                                <p class="card-text">Аналитика по текущему состоянию и готовности ВС</p>
+                                <button class="btn btn-outline-primary btn-sm report-btn" data-report="fleet-status">Открыть</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Выполнение ТО</h5>
+                                <p class="card-text">Статистика выполнения работ по ТО</p>
+                                <button class="btn btn-outline-primary btn-sm report-btn" data-report="maintenance-stats">Открыть</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Расход запчастей</h5>
+                                <p class="card-text">Анализ использования запчастей и комплектующих</p>
+                                <button class="btn btn-outline-primary btn-sm report-btn" data-report="parts-usage">Открыть</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Эффективность персонала</h5>
+                                <p class="card-text">Показатели работы технического персонала</p>
+                                <button class="btn btn-outline-primary btn-sm report-btn" data-report="staff-efficiency">Открыть</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="report-content" class="mt-4">
+                    <!-- Содержимое отчетов будет загружено JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальные окна для работы с данными -->
+    <div class="modal fade" id="aircraft-modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Добавление воздушного судна</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="aircraft-form">
+                        <div class="mb-3">
+                            <label for="aircraft-reg" class="form-label">Регистрационный номер</label>
+                            <input type="text" class="form-control" id="aircraft-reg" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="aircraft-type" class="form-label">Тип ВС</label>
+                            <select class="form-select" id="aircraft-type" required>
+                                <!-- Будет заполнено из API -->
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="aircraft-serial" class="form-label">Серийный номер</label>
+                            <input type="text" class="form-control" id="aircraft-serial" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="aircraft-year" class="form-label">Год выпуска</label>
+                            <input type="number" class="form-control" id="aircraft-year" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary" id="save-aircraft-btn">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer mt-5 py-3 bg-light">
+        <div class="container text-center">
+            <span class="text-muted">Система технического обслуживания воздушных судов &copy; 2023</span>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/api.js"></script>
+</body>
+</html> 

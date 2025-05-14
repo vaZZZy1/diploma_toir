@@ -24,6 +24,16 @@ services:
       - redis
     restart: unless-stopped
 
+  # Веб-клиент
+  web-client:
+    build:
+      context: ./web-client
+    ports:
+      - "80:80"
+    depends_on:
+      - api-gateway
+    restart: unless-stopped
+
   # Сервис управления справочными данными и интеграции (P1)
   service-p1:
     build:
